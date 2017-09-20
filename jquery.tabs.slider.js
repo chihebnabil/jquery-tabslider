@@ -28,7 +28,7 @@
                 }
                 if ($current.index() > 0) {
 
-                    $("#tabs-match .prev-link i").show();
+                    $prevA.show();
                 }
 
                 var $next = $current.next()
