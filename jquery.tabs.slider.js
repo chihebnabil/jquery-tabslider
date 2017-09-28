@@ -7,33 +7,33 @@
             var tabs_count = el.find('.tab').length
             var tabs_index = 1;
 
+        
             $prevA = el.find('.prev-link i');
-
-            $prevA.hide();
-
             $nextA = el.find('.next-link i')
-
-
 
             $nextA.on('click', function (e) {
                 e.preventDefault()
                 tabs_index++;
-                console.log(tabs_index)
                 var $target = $(e.target);
                 var $current = el.find('.tab.active')
 
 
-                if ($current.index() == tabs_count) {
-                    $target.hide()
+               if ($current.index() > tabs_count) {
+                    $current.removeClass('active')
+
+                    var $next = el.find(".tab").first()
+                    tabs_index = 1;
+                    $next.addClass('active')
+
                 }
                 if ($current.index() > 0) {
 
-                    $prevA.show();
+                    var $next = $current.next()
+                    $current.removeClass('active')
+                    $next.addClass('active')
                 }
 
-                var $next = $current.next()
-                $current.removeClass('active')
-                $next.addClass('active')
+
 
             });
 
@@ -46,19 +46,21 @@
                 var $current = el.find('.tab.active')
 
                 if (tabs_index <= 1) {
-                    $target.hide()
+                    $current.removeClass('active')
+                    var $prev = el.find(".tab").last()
+                    $prev.addClass('active')
 
                 }
 
-                if ($current.index() == tabs_count + 1) {
-                    // alert("ok")
-                    $nextA.show();
+                if ($current.index() <= 0) {
+
+                    var $prev = $current.prev()
+                    $current.removeClass('active')
+                    $prev.addClass('active')
+
+                    
                 }
 
-
-                var $prev = $current.prev()
-                $current.removeClass('active')
-                $prev.addClass('active')
             });
 
 
@@ -67,4 +69,3 @@
         });
     };
 })(jQuery)
-
